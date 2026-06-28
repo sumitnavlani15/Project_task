@@ -17,7 +17,7 @@ const taskValidation = [
   body('title')
     .trim()
     .notEmpty().withMessage('Title is required')
-    .isLength({ min: 3, max: 100 }).withMessage('Title must be 3–100 characters'),
+    .isLength({ min: 3, max: 100 }).withMessage('Title must be 3-100 characters'),
   body('description')
     .optional()
     .trim()
@@ -36,7 +36,7 @@ const taskValidation = [
     .isArray().withMessage('Tags must be an array'),
 ];
 
-// GET /api/tasks — list with filtering, sorting, pagination
+// GET tasks — list with filtering, sorting, pagination
 router.get(
   '/',
   [
@@ -81,7 +81,7 @@ router.get(
   }
 );
 
-// GET /api/tasks/stats — summary counts by status
+// GET tasks/stats
 router.get('/stats', async (req, res, next) => {
   try {
     const stats = await Task.aggregate([
@@ -103,7 +103,7 @@ router.get('/stats', async (req, res, next) => {
   }
 });
 
-// GET /api/tasks/:id
+// GET tasks/:id
 router.get(
   '/:id',
   [param('id').isMongoId().withMessage('Invalid task ID')],
@@ -119,7 +119,7 @@ router.get(
   }
 );
 
-// POST /api/tasks
+// POST tasks
 router.post('/', taskValidation, handleValidation, async (req, res, next) => {
   try {
     const task = await Task.create(req.body);
@@ -129,7 +129,7 @@ router.post('/', taskValidation, handleValidation, async (req, res, next) => {
   }
 });
 
-// PUT /api/tasks/:id — full update
+// PUT tasks/:id — full update
 router.put(
   '/:id',
   [param('id').isMongoId().withMessage('Invalid task ID'), ...taskValidation],
@@ -148,7 +148,7 @@ router.put(
   }
 );
 
-// PATCH /api/tasks/:id — partial update (e.g. toggle status)
+// PATCH tasks/:id — partial update (e.g. toggle status)
 router.patch(
   '/:id',
   [param('id').isMongoId().withMessage('Invalid task ID')],
@@ -167,7 +167,7 @@ router.patch(
   }
 );
 
-// DELETE /api/tasks/:id
+// DELETE tasks/:id
 router.delete(
   '/:id',
   [param('id').isMongoId().withMessage('Invalid task ID')],
