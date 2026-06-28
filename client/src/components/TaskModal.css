@@ -1,0 +1,6 @@
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.required { color: var(--red); }
+
+@media (max-width: 420px) {
+  .form-row { grid-template-columns: 1fr; }
+}
